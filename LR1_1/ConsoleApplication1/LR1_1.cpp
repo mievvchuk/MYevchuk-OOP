@@ -35,3 +35,5 @@ int main() {
     delete pCountry; // для динамічного одного об'єкта
     return 0;
 }
+//test commit 454534223
+//32322233
