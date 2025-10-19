@@ -1,0 +1,121 @@
+﻿//Podorozh.cs
+using LR1_3;
+using System;
+public class Podorozh : IPodorozh
+{
+    public string Misto { get; set; }
+    public double Vidstan { get; set; }
+    public int Dni { get; set; }
+    public string Transport { get; set; }
+    private readonly Itinerary itinerary = new Itinerary();
+    public Itinerary Itinerary => itinerary;
+
+    // Помічник для додавання житла
+    public void AddAccommodation(string hotelName, int nights, double pricePerNight)
+    {
+        var acc = new Accommodation(hotelName, nights, pricePerNight);
+        itinerary.AddAccommodation(acc);
+    }
+
+    // Оцінка загальної вартості подорожі з урахуванням проживання (best-effort)
+    public double TotalCostWithAccommodation()
+    {
+        double baseCost = 0;
+        try
+        {
+            var m = this.GetType().GetMethod("RozrakhVartistPodorozh") ?? this.GetType().GetMethod("RozrakhVartist");
+            if (m != null)
+                baseCost = Convert.ToDouble(m.Invoke(this, null));
+        }
+        catch { /* ignore */ }
+
+        double accom = itinerary.TotalAccommodationCost();
+        return baseCost + accom;
+    }
+    public Podorozh(string misto, double vidstan, int dni, string transport)
+    {
+        Misto = misto;
+        Vidstan = vidstan;
+        Dni = dni;
+        Transport = transport;
+    }
+
+    public double RozrakhVartist()
+    {
+        double tsinaZaKm = 5;
+        double tsinaZaDen = 200;
+        return (Vidstan * tsinaZaKm) + (Dni * tsinaZaDen);
+    }
+
+    public double SerednyaTsinaKm()
+    {
+        return RozrakhVartist() / Vidstan;
+    }
+
+    public virtual string Info()
+    {
+        return $"Місто: {Misto}, Відстань: {Vidstan} км, Дні: {Dni}, Транспорт: {Transport}, Вартість: {RozrakhVartist()} грн";
+    }
+    // Перевантаження операторів
+    public static Podorozh operator +(Podorozh a, Podorozh b)
+    {
+        return new Podorozh(
+            a.Misto + "-" + b.Misto,         // нова назва (об’єднані міста)
+            a.Vidstan + b.Vidstan,           // сумарна відстань
+            a.Dni + b.Dni,                   // сумарні дні
+            a.Transport                      // лишаємо транспорт від першої (можна інакше)
+        );
+    }
+
+    public static bool operator >(Podorozh a, Podorozh b)
+    {
+        return a.RozrakhVartist() > b.RozrakhVartist();
+    }
+
+    public static bool operator <(Podorozh a, Podorozh b)
+    {
+        return a.RozrakhVartist() < b.RozrakhVartist();
+    }
+
+    public static bool operator ==(Podorozh a, Podorozh b)
+    {
+        if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            return true;
+
+        if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            return false;
+
+        return a.Misto == b.Misto && a.Transport == b.Transport;
+    }
+
+    public static bool operator !=(Podorozh a, Podorozh b)
+    {
+        return !(a == b);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Podorozh other)
+            return this == other;
+        return false;
+    }
+
+    public static Podorozh operator ++(Podorozh a)
+    {
+        if (a == null) return a;
+        a.Dni += 1;
+        return a;
+    }
+
+    public static Podorozh operator --(Podorozh a)
+    {
+        if (a == null) return a;
+        a.Dni = a.Dni > 1 ? a.Dni - 1 : 1;
+        return a;
+    }
+
+    public override int GetHashCode()
+    {
+        return (Misto + Transport).GetHashCode();
+    }
+}

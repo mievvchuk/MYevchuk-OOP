@@ -1,0 +1,12 @@
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\bin\Debug\LR1_3.exe.config
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\bin\Debug\LR1_3.exe
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\bin\Debug\LR1_3.pdb
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.csproj.AssemblyReference.cache
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.Form1.resources
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.Form2.resources
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.Properties.Resources.resources
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.csproj.GenerateResource.cache
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.csproj.CoreCompileInputs.cache
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.exe
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.pdb
+C:\Users\Mykhailo\source\repos\LR1_3\LR1_3\obj\Debug\LR1_3.exe.config
