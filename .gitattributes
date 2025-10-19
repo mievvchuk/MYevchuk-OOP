@@ -1,0 +1,2 @@
+Report/*.zip !text !filter !merge !diff
+Report/*.rar !text !filter !merge !diff
